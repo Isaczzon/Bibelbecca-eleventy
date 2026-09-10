@@ -33,7 +33,6 @@ eleventyComputed:
         <a class="kat-card fade-in" href="/{{ loc.prefix }}innehall/{{ kat.slug }}/">
             <div class="kat-thumb">
                 <img src="https://i.ytimg.com/vi/{{ senaste.data.url | youtubeId }}/hqdefault.jpg" alt=""{% if loop.index == 1 %} loading="eager" fetchpriority="high"{% else %} loading="lazy"{% endif %}>
-                <span class="kat-ikon">{{ kat.ikon }}</span>
             </div>
             <div class="kat-body">
                 <h2>{{ sektion.rubrik }}</h2>
