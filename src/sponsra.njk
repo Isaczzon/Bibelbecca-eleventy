@@ -94,7 +94,7 @@ eleventyComputed:
             <h2>{{ sidan.sma.rubrik }} <span class="pris-badge">upp till {{ prisgrans | tal('sv-SE') }} kr</span></h2>
             <p>{{ sidan.sma.undertitel }}</p>
         </div>
-        <div class="sponsor-grid">
+        <div class="sponsor-grid sponsor-grid--sma">
             {% for post in sma %}{{ kort(post, sidan, gosedjurText, kod) }}{% endfor %}
         </div>
     </div>
@@ -107,7 +107,7 @@ eleventyComputed:
         <h2>{{ sidan.stora.rubrik }} <span class="pris-badge">över {{ prisgrans | tal('sv-SE') }} kr</span></h2>
         <p>{{ sidan.stora.undertitel }}</p>
     </div>
-    <div class="sponsor-grid">
+    <div class="sponsor-grid sponsor-grid--stora">
         {% for post in stora %}{{ kort(post, sidan, gosedjurText, kod) }}{% endfor %}
     </div>
 </section>
