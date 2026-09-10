@@ -1,8 +1,0 @@
-{
-  "navnamn": "Privacy",
-  "hero": {
-    "rubrik": "Privacy policy",
-    "undertitel": "How your information is handled on this website"
-  },
-  "body": "<h2>The contact form</h2>\n<p>When you send a message via the contact form, your name, email address and message are processed for one purpose only: to read and reply to it. The message is delivered via <a href=\"https://formspree.io\" target=\"_blank\" rel=\"noopener\">Formspree</a> to BibelBecca's email. Your information is never shared with anyone else and is not used for marketing. If you want your message deleted, just get in touch.</p>\n<h2>No cookies or tracking</h2>\n<p>This website uses no cookies and no tracking. The only settings stored in your browser (locally – they never leave your device) are your choice of light/dark mode and language.</p>\n<h2>YouTube videos</h2>\n<p>Videos on this site only load when you press play. They are played through YouTube's privacy-enhanced mode (youtube-nocookie.com), which doesn't set cookies until you start playback. Once you play a video, <a href=\"https://policies.google.com/privacy\" target=\"_blank\" rel=\"noopener\">Google's privacy policy</a> applies.</p>\n<h2>Questions?</h2>\n<p>Reach out via the contact page or email directly – the contact details are in the footer.</p>"
-}

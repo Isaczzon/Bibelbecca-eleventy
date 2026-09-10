@@ -1,6 +1,0 @@
----
-titel: "Kristen podcast 🇸🇪"
-typ: Short
-datum: 2024-10-01
-url: https://www.youtube.com/shorts/76byUj34v3g
----

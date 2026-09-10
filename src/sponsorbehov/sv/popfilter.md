@@ -1,9 +1,9 @@
 ---
-titel: Popfilter till mikrofonen
+titel: "Popfilter"
 ikon: 🎤
 status: Önskas
-ordning: 4
-pris: 150
+ordning: 2
+pris: 199
 swishqr: ""
-beskrivning: Ett popfilter tar bort smällarna på p- och b-ljud och ger ett renare, behagligare poddljud. (Exempel – byt ut mot en riktig pryl.)
+beskrivning: "Ett popfilter framför mikrofonen tar bort smällarna på p- och b-ljud och ger ett renare, behagligare poddljud."
 ---

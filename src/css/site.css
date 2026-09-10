@@ -972,8 +972,9 @@ button.sponsor-cta { font-family: 'Inter', sans-serif; cursor: pointer; }
     max-width: min(420px, calc(100vw - 32px)); box-shadow: 0 20px 60px rgba(0,0,0,0.45);
 }
 .swish-dialog::backdrop { background: rgba(0,0,0,0.65); backdrop-filter: blur(3px); }
-.swish-dialog-inner { position: relative; padding: 36px 28px 28px; text-align: center; }
-.swish-dialog h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 20px; color: var(--text-strong); margin: 0 0 4px; }
+.swish-dialog-inner { position: relative; padding: 40px 28px 28px; text-align: center; }
+/* Rubriken får luft i sidled så att den inte hamnar under stängningskrysset på smala mobiler. */
+.swish-dialog h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 20px; color: var(--text-strong); margin: 0 0 4px; padding: 0 24px; overflow-wrap: anywhere; }
 .swish-belopp { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 28px; color: var(--accent); margin: 0 0 12px; }
 .swish-belopp-etikett { display: block; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 2px; }
 .swish-bidrag { font-size: 15px; margin: 0 0 14px; }
