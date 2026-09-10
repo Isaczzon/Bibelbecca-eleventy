@@ -989,6 +989,9 @@ footer a:hover { color: var(--guld-ljus); }
 button.sponsor-cta { font-family: 'Inter', sans-serif; cursor: pointer; }
 /* Swish-rutan är en <dialog>: öppnas av site.js, stängs med krysset, Esc eller klick utanför */
 .swish-dialog {
+    /* margin: auto behövs uttryckligen: den globala nollställningen av margin tar
+       annars bort webbläsarens centrering av <dialog>. */
+    margin: auto;
     border: 1px solid var(--guld); border-radius: 16px; padding: 0;
     background: var(--bg-card); color: var(--text-strong);
     max-width: min(420px, calc(100vw - 32px)); box-shadow: 0 20px 60px rgba(0,0,0,0.45);
