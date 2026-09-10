@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Svepande fördröjning per kort i rutnäten – ger en "våg" när de tonas in
-    document.querySelectorAll('.video-list, .shorts-list, .kat-grid, .sponsor-grid, .tack-grid').forEach((grid) =>
+    document.querySelectorAll('.video-list, .shorts-list, .kat-grid, .sponsor-grid').forEach((grid) =>
         [...grid.children].forEach((el, i) => {
             if (el.classList.contains('fade-in')) el.style.setProperty('--fade-delay', ((i % 6) * 80) + 'ms');
         })
@@ -232,7 +232,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const oppna = e.target.closest('[data-dialog]');
         if (oppna) {
             const ruta = document.getElementById(oppna.getAttribute('data-dialog'));
-            if (ruta && typeof ruta.showModal === 'function' && !ruta.open) ruta.showModal();
+            if (ruta && typeof ruta.showModal === 'function') {
+                if (!ruta.open) ruta.showModal();
+            } else {
+                // Gammal webbläsare utan <dialog>: visa sektionen Valfritt bidrag i stället
+                const bidrag = document.getElementById('bidrag');
+                if (bidrag) bidrag.scrollIntoView({ behavior: 'smooth' });
+            }
             return;
         }
         const stang = e.target.closest('[data-stang]');
@@ -241,7 +247,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (ruta) ruta.close();
             return;
         }
-        if (e.target instanceof HTMLDialogElement && e.target.open) e.target.close();
+        // Klick på bakgrunden stänger rutan. Klicket landar på själva <dialog>-
+        // elementet även när man markerat text inne i rutan och släppt musen
+        // utanför, så koordinaterna kontrolleras mot rutans yta.
+        if (e.target.tagName === 'DIALOG' && e.target.open) {
+            const r = e.target.getBoundingClientRect();
+            const utanfor = e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom;
+            if (utanfor) e.target.close();
+        }
     });
 
 });

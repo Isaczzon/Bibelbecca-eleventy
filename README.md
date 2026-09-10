@@ -14,7 +14,7 @@ Sajten har samma struktur som Elimkyrkan Mantorps webbplats: mörkt/ljust läge,
 - **Hem** – hero, senaste videor/poddavsnitt, om-teaser och sponsor-CTA
 - **Om** – om Becca, podden och vad kanalen står för
 - **Titta & lyssna** (`/innehall/`) – nav med kategorikort som leder till egna sidor: *Videor*, *Podcast*, *Serien "Hur kommer man till himlen?"*, *Shorts*, *Lives* och *Beccas BibelstudieTips*. Kategorier utan innehåll döljs automatiskt på navet.
-- **Sponsra** – aktuella sponsorbehov (mikrofoner, kameror m.m.) som Becca själv lägger upp i CMS:et, samt virkade tack-gåvor (bibelband, lamm, åsna …) som sponsorer får välja bland
+- **Sponsra** – sponsorbehov i tre sektioner (upp till 500 kr, över 500 kr, valfritt bidrag) med Swish-QR-kod per behov, och texten om det handvirkade gosedjur som skänks vidare för varje bidrag
 - **Kontakt** – e-post, sociala länkar och Formspree-formulär
 
 ## Så hänger det ihop
@@ -30,7 +30,6 @@ Becca → /admin/ (Sveltia CMS) → commit till GitHub → GitHub Actions bygger
 - **Mallar/design**: `src/_includes/`, `src/css/site.css` (inkl. mörkt läge), `src/js/site.js`.
 - Bilder som laddas upp via CMS:et hamnar i `images/uploads/`.
 
-I CMS:et redigeras båda språken sida vid sida – Sveltia visar en flik per språk för varje fält som är översättningsbart.
 
 ## Köra lokalt
 
@@ -104,7 +103,6 @@ behöver göra något.
   publikt av Spotify och uppdateras därför manuellt i CMS:et under Inställningar.
   Misslyckas en hämtning behålls det gamla värdet.
 - Befintliga filer rörs aldrig – Beccas redigeringar i CMS:et skrivs inte över.
-- Nya inslag får svensk titel även på engelska sidan; vill man översätta görs det i CMS:et.
 - Skriptet använder YouTubes interna webb-API (inofficiellt). Skulle YouTube ändra formatet
   slutar hämtningen fungera tills skriptet uppdateras – sajten påverkas inte, och inslag kan
   alltid läggas in manuellt i CMS:et under tiden.

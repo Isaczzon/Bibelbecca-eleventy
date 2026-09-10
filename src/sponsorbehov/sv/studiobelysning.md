@@ -5,5 +5,5 @@ status: Finansierad
 ordning: 3
 pris: 900
 swishqr: ""
-beskrivning: Mjuk och jämn belysning till studion. Stort tack till er som gjorde detta möjligt – belysningen är nu på plats!
+beskrivning: Mjuk och jämn belysning till studion. Stort tack till er som bidrog – kostnaden är täckt!
 ---

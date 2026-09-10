@@ -741,42 +741,6 @@ button.hero-btn { font-family: 'Inter', sans-serif; cursor: pointer; }
 }
 .sponsor-cta:hover { background: var(--guld); color: var(--svart); transform: translateY(-1px); }
 
-/* === TACK-GÅVOR (virkade bibelsaker på sponsorsidan) === */
-.tack-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-.tack-card {
-    background: var(--bg-card);
-    border-radius: 12px;
-    padding: 28px 20px 22px;
-    text-align: center;
-    box-shadow: var(--shadow-soft);
-    border: 1px dashed var(--guld);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-.tack-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
-.tack-icon {
-    width: 64px; height: 64px;
-    border-radius: 50%;
-    background: var(--bg-section-gold);
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 14px;
-    font-size: 30px;
-}
-.tack-img {
-    width: 100%;
-    height: 140px;
-    border-radius: 8px;
-    background-size: cover;
-    background-position: center;
-    margin-bottom: 14px;
-}
-.tack-card h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; color: var(--text-strong); margin-bottom: 6px; }
-.tack-card p { color: var(--text-muted); font-size: 13px; line-height: 1.5; margin: 0; }
 
 /* === ABOUT PAGE === */
 .about-section {
@@ -997,6 +961,7 @@ footer a:hover { color: var(--guld-ljus); }
     background: var(--bg-section-gold); color: var(--text-body); border-radius: 0 8px 8px 0; font-size: 15px;
 }
 button.sponsor-cta { font-family: 'Inter', sans-serif; cursor: pointer; }
+.gosedjur-rad--sektion { display: inline-block; max-width: 600px; margin: 14px auto 0; text-align: left; }
 /* Swish-rutan är en <dialog>: öppnas av site.js, stängs med krysset, Esc eller klick utanför */
 .swish-dialog {
     /* margin: auto behövs uttryckligen: den globala nollställningen av margin tar
@@ -1009,7 +974,9 @@ button.sponsor-cta { font-family: 'Inter', sans-serif; cursor: pointer; }
 .swish-dialog::backdrop { background: rgba(0,0,0,0.65); backdrop-filter: blur(3px); }
 .swish-dialog-inner { position: relative; padding: 36px 28px 28px; text-align: center; }
 .swish-dialog h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 20px; color: var(--text-strong); margin: 0 0 4px; }
-.swish-belopp { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 28px; color: var(--accent); margin: 0 0 16px; }
+.swish-belopp { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 28px; color: var(--accent); margin: 0 0 12px; }
+.swish-belopp-etikett { display: block; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 2px; }
+.swish-bidrag { font-size: 15px; margin: 0 0 14px; }
 /* Vit platta bakom QR-koden så att den går att skanna även i mörkt läge */
 .swish-qr { display: block; width: 240px; height: 240px; max-width: 100%; margin: 0 auto 16px; border-radius: 12px; background: #fff; padding: 8px; box-sizing: border-box; }
 .swish-dialog p, .donation-ruta p { color: var(--text-body); font-size: 15px; line-height: 1.6; margin: 0 0 12px; }

@@ -18,7 +18,7 @@ slug:
 
 i18n:
   structure: multiple_folders
-  locales: [sv, en]
+  locales: [sv]
   default_locale: sv
 
 collections:
@@ -163,7 +163,8 @@ collections:
               - { name: undertitel, label: Undertitel, widget: string, i18n: true }
               - { name: bild, label: Bakgrundsbild, widget: image, required: false, i18n: duplicate }
           - { name: intro, label: Introtext, widget: text, i18n: true }
-          - { name: prisgrans, label: Prisgräns (kr), widget: number, value_type: int, default: 500, i18n: duplicate, hint: "Behov upp till gränsen hamnar i första sektionen, dyrare i den andra." }
+          - { name: bidragstext, label: Text i Swish-rutan, widget: text, required: false, i18n: true, hint: "Visas i varje Swish-ruta ovanför instruktionen – t.ex. att utrustningen redan är inköpt." }
+          - { name: prisgrans, label: Prisgräns (kr), widget: number, value_type: int, default: 500, i18n: duplicate, hint: "Utrustning upp till gränsen hamnar i första sektionen, dyrare i den andra." }
           - name: gosedjur
             label: Gosedjuret (visas i alla tre sektioner)
             widget: object
@@ -192,7 +193,7 @@ collections:
             fields:
               - { name: rubrik, label: Rubrik, widget: string, i18n: true }
               - { name: text, label: Text, widget: text, i18n: true }
-              - { name: swish, label: Swish-nummer, widget: string, required: false, i18n: duplicate, hint: "Visas som text under QR-koden och i Swish-rutorna." }
+              - { name: swish, label: Swish-nummer, widget: string, required: false, i18n: duplicate, hint: "Fyll alltid i: den som besöker sidan på mobilen kan inte skanna sin egen skärm och behöver numret. Visas under QR-koden och i Swish-rutorna." }
               - { name: qr, label: Allmän Swish-QR-kod, widget: image, required: false, i18n: duplicate, hint: "QR-kod utan förifyllt belopp. Används också för behov som saknar egen kod." }
           - name: ovrigt
             label: Andra sätt att stötta
@@ -283,11 +284,11 @@ collections:
         widget: select
         i18n: duplicate
         options:
-          - { label: "Önskas", value: "Önskas" }
-          - { label: "Finansierad", value: "Finansierad" }
+          - { label: "Öppen för bidrag", value: "Önskas" }
+          - { label: "Kostnaden täckt – visas som tack", value: "Finansierad" }
       - { name: lank, label: Länk till exempel på produkt (valfritt), widget: string, required: false, i18n: duplicate }
       - { name: ordning, label: Ordning, widget: number, value_type: int, hint: "Lägre nummer visas först", i18n: duplicate }
-      - { name: pris, label: Pris (kr), widget: number, value_type: int, required: false, i18n: duplicate, hint: "Styr vilken sektion behovet hamnar i (upp till eller över prisgränsen) och visas i Swish-rutan." }
+      - { name: pris, label: Inköpspris (kr), widget: number, value_type: int, required: false, i18n: duplicate, hint: "Vad utrustningen kostade. Styr vilken sektion den hamnar i (upp till eller över prisgränsen) och visas i Swish-rutan." }
       - { name: swishqr, label: Swish-QR-kod, widget: image, required: false, i18n: duplicate, hint: "Skapa i Swish-appen (Skapa QR-kod) med belopp och meddelande förifyllt. Utan egen kod visas den allmänna koden från sponsorsidan." }
 
   - name: installningar

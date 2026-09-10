@@ -41,29 +41,30 @@ eleventyComputed:
     <div class="sponsor-icon">{{ post.data.ikon or '🎁' }}</div>
     {% endif %}
     <span class="sponsor-status {% if finansierad %}is-funded{% else %}is-wanted{% endif %}">
-        {% if finansierad %}✓ Finansierad – tack!{% else %}Önskas{% endif %}
+        {% if finansierad %}✓ Kostnaden täckt – tack!{% else %}Inköpt – bidra gärna{% endif %}
     </span>
     <h3>{{ post.data.titel }}</h3>
-    {% if post.data.pris %}<p class="sponsor-pris">{{ post.data.pris | tal('sv-SE') }} kr</p>{% endif %}
+    {% if post.data.pris %}<p class="sponsor-pris">Inköpt för {{ post.data.pris | tal('sv-SE') }} kr</p>{% endif %}
     <p>{{ post.data.beskrivning }}</p>
     {% if post.data.lank %}
     <p><a href="{{ post.data.lank }}" target="_blank" rel="noopener">Se exempel på produkt →</a></p>
     {% endif %}
     {% if not finansierad %}
-    <button type="button" class="sponsor-cta" data-dialog="{{ dialogId }}">Vill du sponsra detta? →</button>
+    <button type="button" class="sponsor-cta" data-dialog="{{ dialogId }}">Vill du bidra till detta? →</button>
     <dialog class="swish-dialog" id="{{ dialogId }}" aria-labelledby="{{ dialogId }}-rubrik">
         <div class="swish-dialog-inner">
             <button type="button" class="swish-stang" data-stang aria-label="Stäng">×</button>
             <h3 id="{{ dialogId }}-rubrik">{{ post.data.titel }}</h3>
-            {% if post.data.pris %}<p class="swish-belopp">{{ post.data.pris | tal('sv-SE') }} kr</p>{% endif %}
+            {% if post.data.pris %}<p class="swish-belopp"><span class="swish-belopp-etikett">Inköpt för</span>{{ post.data.pris | tal('sv-SE') }} kr</p>{% endif %}
+            {% if sidan.bidragstext %}<p class="swish-bidrag">{{ sidan.bidragstext }}</p>{% endif %}
             {% if qr %}
-            <img class="swish-qr" src="{{ qr | url }}" alt="Swish-QR-kod för {{ post.data.titel }}" width="240" height="240" loading="lazy" decoding="async">
+            <img class="swish-qr" src="{{ qr | url }}" alt="Swish-QR-kod för {{ post.data.titel }}" width="240" height="240" decoding="async">
             <p>Öppna Swish, tryck på <strong>Skanna</strong> och rikta kameran mot koden.
-                {%- if post.data.swishqr %} Belopp och meddelande fylls i automatiskt.
-                {%- else %} Ange {% if post.data.pris %}{{ post.data.pris | tal('sv-SE') }} kr{% else %}beloppet{% endif %} och skriv "{{ post.data.titel }}" som meddelande.{% endif %}</p>
+                {%- if post.data.swishqr %} Belopp och meddelande fylls i automatiskt – ändra gärna beloppet om du vill bidra med en del.
+                {%- else %} Ange beloppet du vill bidra med och skriv "{{ post.data.titel }}" som meddelande.{% endif %}</p>
             {% endif %}
             {% if sidan.donation.swish %}
-            <p class="swish-nummer">Eller swisha till <strong>{{ sidan.donation.swish }}</strong> och skriv "{{ post.data.titel }}" som meddelande.</p>
+            <p class="swish-nummer">Eller swisha valfritt belopp till <strong>{{ sidan.donation.swish }}</strong> och skriv "{{ post.data.titel }}" som meddelande.</p>
             {% endif %}
             {% if not qr and not sidan.donation.swish %}
             <p>Swish-uppgifterna läggs upp inom kort. <a href="/{{ loc.prefix }}kontakt/">Hör av dig via kontaktsidan</a> så länge.</p>
@@ -93,6 +94,7 @@ eleventyComputed:
         <div class="section-header fade-in">
             <h2>{{ sidan.sma.rubrik }} <span class="pris-badge">upp till {{ prisgrans | tal('sv-SE') }} kr</span></h2>
             <p>{{ sidan.sma.undertitel }}</p>
+            {% if gosedjurText %}<p class="gosedjur-rad gosedjur-rad--sektion">🧸 {{ gosedjurText }}</p>{% endif %}
         </div>
         <div class="sponsor-grid sponsor-grid--sma">
             {% for post in sma %}{{ kort(post, sidan, gosedjurText, kod) }}{% endfor %}
@@ -106,6 +108,7 @@ eleventyComputed:
     <div class="section-header fade-in">
         <h2>{{ sidan.stora.rubrik }} <span class="pris-badge">över {{ prisgrans | tal('sv-SE') }} kr</span></h2>
         <p>{{ sidan.stora.undertitel }}</p>
+        {% if gosedjurText %}<p class="gosedjur-rad gosedjur-rad--sektion">🧸 {{ gosedjurText }}</p>{% endif %}
     </div>
     <div class="sponsor-grid sponsor-grid--stora">
         {% for post in stora %}{{ kort(post, sidan, gosedjurText, kod) }}{% endfor %}

@@ -2,25 +2,26 @@
   "navnamn": "Sponsra",
   "hero": {
     "rubrik": "Var med och sponsra",
-    "undertitel": "Hjälp BibelBecca-podden att växa – varje bidrag gör skillnad"
+    "undertitel": "Hjälp BibelBecca podcast att utvecklas – varje bidrag gör skillnad"
   },
-  "intro": "BibelBecca drivs helt ideellt. Här nedanför ser du vad som behövs just nu, stort som smått. Välj det du vill bidra till och swisha direkt – eller ge ett valfritt belopp.",
+  "intro": "BibelBecca drivs helt ideellt och all utrustning är redan inköpt. Här nedanför ser du vad som är på plats, stort som smått. Vill du vara med och bära kostnaden för något av det? Swisha direkt – eller ge ett valfritt belopp. Varje bidrag hjälper podcasten att utvecklas.",
+  "bidragstext": "Utrustningen är redan inköpt – ditt bidrag täcker en del av kostnaden och går i stort till att utveckla podcasten.",
   "prisgrans": 500,
   "gosedjur": {
     "mottagare": "H.K.H. Kronprinsessan Victorias barn- och ungdomssjukhus",
     "text": "För varje bidrag skänker Becca ett handvirkat gosedjur till {mottagare}."
   },
   "sma": {
-    "rubrik": "Små behov",
-    "undertitel": "Smått som gör stor skillnad – swisha beloppet direkt"
+    "rubrik": "Mindre utrustning",
+    "undertitel": "Redan inköpt – bidra gärna med hela beloppet och swisha direkt"
   },
   "stora": {
-    "rubrik": "Större behov",
-    "undertitel": "Utrustning som lyfter podden – varje krona räknas, hela eller delar av beloppet"
+    "rubrik": "Större utrustning",
+    "undertitel": "Redan inköpt – bidra med hela eller delar av beloppet, varje krona räknas"
   },
   "donation": {
     "rubrik": "Valfritt bidrag",
-    "text": "Vill du hellre ge ett valfritt belopp? Skanna QR-koden med Swish, välj summa och skriv gärna en hälsning.",
+    "text": "Vill du hellre ge ett valfritt belopp? Skanna QR-koden med Swish, välj summa och skriv gärna en hälsning. Bidraget går i stort till att utveckla podcasten – bättre ljud och bild, mer innehåll och fler gäster.",
     "swish": "",
     "qr": ""
   },

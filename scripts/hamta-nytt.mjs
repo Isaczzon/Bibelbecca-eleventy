@@ -5,7 +5,6 @@
 //   node scripts/hamta-nytt.mjs
 //
 // Befintliga filer rörs aldrig – Beccas redigeringar i CMS:et är säkra.
-// Nya inslag får svensk titel även i en-mappen; översätt i CMS:et vid behov.
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -144,7 +143,6 @@ for (const id of nya) {
 
   const innehall = `---\ntitel: ${JSON.stringify(titel)}\ntyp: ${typ}\ndatum: ${datum}\nurl: ${url}\n---\n`;
   writeFileSync(path.join(MEDIA, "sv", filnamn), innehall);
-  writeFileSync(path.join(MEDIA, "en", filnamn), innehall);
   console.log(`  + ${typ}: ${titel} (${datum})`);
 }
 
@@ -157,7 +155,7 @@ console.log(nya.length ? `Klart – ${nya.length} nya inslag tillagda.` : "Inget
 // det gamla värdet – sajten visar aldrig något tomt.
 
 function sparaStat(falt, antal) {
-  for (const sprak of ["sv", "en"]) {
+  for (const sprak of ["sv"]) {
     const fil = path.join(ROT, "src", "_data", "sajt", `${sprak}.json`);
     const data = JSON.parse(readFileSync(fil, "utf8"));
     if (data[falt] !== antal) {
