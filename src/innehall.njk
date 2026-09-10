@@ -47,7 +47,7 @@ eleventyComputed:
     </div>
 
     <p style="text-align:center; margin-top:48px;">
-        {% if sajten.youtube %}<a class="hero-btn hero-btn--alt" href="{{ sajten.youtube }}" target="_blank" rel="noopener">{{ ikon('youtube') }} {{ ui.prenumerera }}</a>{% endif %}
+        {% if sajten.youtube %}<a class="hero-btn hero-btn--alt hero-btn--youtube" href="{{ sajten.youtube }}" target="_blank" rel="noopener">{{ ikon('youtube') }} {{ ui.prenumerera }}</a>{% endif %}
         {% if sajten.spotify %}<a class="hero-btn hero-btn--alt" href="{{ sajten.spotify }}" target="_blank" rel="noopener">{{ ikon('spotify') }} {{ ui.lyssnaSpotify }}</a>{% endif %}
         {% if sajten.tiktok %}<a class="hero-btn hero-btn--alt" href="{{ sajten.tiktok }}" target="_blank" rel="noopener">{{ ikon('tiktok') }} {{ ui.foljTiktok }}</a>{% endif %}
         {% if sajten.instagram %}<a class="hero-btn hero-btn--alt" href="{{ sajten.instagram }}" target="_blank" rel="noopener">{{ ikon('instagram') }} {{ ui.foljInstagram }}</a>{% endif %}

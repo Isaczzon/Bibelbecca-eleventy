@@ -4,10 +4,15 @@
     --svart-mjuk: #1f1f1f;
     --guld: #E5C04B;
     --guld-ljus: #F2DC7E;
-    --guld-mork: #7D641A;
+    /* Mörk guld för länkar och små etiketter i ljust läge. #6E5715 ger 6,9:1
+       mot vitt (APCA Lc 84) – #7D641A låg på 5,7:1 / Lc 78, för lite för
+       12–13 px versaletiketter. */
+    --guld-mork: #6E5715;
     --guld-pale: #FAF4DE;
     --gray-dark: #4A4A4A;
-    --gray-mid: #757575;
+    /* Dämpad text. #757575 föll under 4,5:1 mot den benvita sidbakgrunden
+       (4,4:1) och cremesektionerna (4,1:1). #595959 ger 6,7:1 / Lc 81. */
+    --gray-mid: #595959;
     --gray-light: #B0B0B0;
     --gray-pale: #EDEDED;
     --off-white: #FBFAF7;
@@ -25,6 +30,11 @@
     --text-strong: var(--black);
     --accent: var(--guld-mork);
     --border-soft: var(--gray-pale);
+    /* Kant på fält och knappar som ska gå att urskilja (WCAG 1.4.11 kräver
+       3:1 mot ytan bakom). border-soft är för ljus för det och är kvar som
+       ren dekor på kort och avdelare. #8A8A8A = 3,5:1 mot vitt. */
+    --border-field: #8A8A8A;
+    --shadow-field: inset 0 1px 3px rgba(0,0,0,0.08);
     --nav-bg: rgba(255,255,255,0.97);
     --shadow-soft: 0 2px 12px rgba(0,0,0,0.06);
     --shadow-hover: 0 4px 20px rgba(0,0,0,0.1);
@@ -37,11 +47,16 @@
     --bg-section-alt: #181715;
     --bg-section-gold: #211c10;
     --text-body: #d4d4d4;
-    --text-muted: #9a9a9a;
+    /* #9a9a9a klarade WCAG (6,7:1) men bara APCA Lc 47 – ljus text på mörkt
+       bedöms hårdare. #BDBDBD ger 10:1 / Lc 66 och är fortfarande tydligt
+       dämpad mot brödtextens #d4d4d4. */
+    --text-muted: #BDBDBD;
     --text-heading: #F0D469;
     --text-strong: #f0f0f0;
     --accent: var(--guld);
     --border-soft: #2e2e2e;
+    --border-field: #6B6B6B; /* 3,1:1 mot kortytan #1d1d1d */
+    --shadow-field: inset 0 1px 3px rgba(0,0,0,0.45);
     --nav-bg: rgba(18,18,18,0.97);
     --shadow-soft: 0 2px 12px rgba(0,0,0,0.45);
     --shadow-hover: 0 4px 20px rgba(0,0,0,0.55);
@@ -63,6 +78,18 @@ a { color: var(--accent); }
 /* Formulärfel – tillräcklig kontrast i båda lägena */
 .form-fel { color: #B00020; }
 [data-theme="dark"] .form-fel { color: #FF9B9B; }
+
+/* Platshållartext i fält. Webbläsarens standard (Chrome: #A9A9A9) ger bara
+   2,4:1 mot vitt; samma dämpade nyans som övrig sekundärtext i stället. */
+::placeholder { color: var(--text-muted); opacity: 1; }
+
+/* Synlig fokusmarkering för tangentbordsnavigering. Guldringen ensam gav
+   1,7:1 mot ljus bakgrund; accentfärgen är mörk guld i ljust läge och guld
+   i mörkt, så ramen når 3:1 i båda. */
+:is(a, button, input, select, textarea, summary):focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
 
 /* === NAVIGATION === */
 nav#navbar {
@@ -135,7 +162,7 @@ nav#navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
     bottom: -4px;
     left: 0; right: 0;
     height: 2px;
-    background: var(--accent);
+    background: var(--accent); /* mörk guld i ljust läge: 5,4:1 mot navytan */
     border-radius: 1px;
 }
 
@@ -287,6 +314,20 @@ main { padding-top: 72px; }
     color: var(--white);
 }
 .hero-btn--ghost:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.5); }
+/* "Prenumerera på YouTube" blir en YouTube-spelknapp vid hover: röd yta med
+   vit text och vit spelpil. #E00000 i stället för YouTubes #FF0000 så att vit
+   text når 5,1:1 (WCAG AA) – #FF0000 stannar på 4,0:1. */
+.hero-btn--youtube:hover,
+.hero-btn--youtube:focus-visible {
+    background: #E00000;
+    border-color: #E00000;
+    color: #FFFFFF;
+    box-shadow: 0 6px 18px rgba(224,0,0,0.35);
+    transform: translateY(-1px);
+}
+.hero-btn--youtube:active { background: #CC0000; border-color: #CC0000; }
+.hero-btn--youtube { transition: background 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s; }
+
 /* Svart ruta med guldram – som "Gift"-skylten i podden */
 .hero-btn--alt {
     background: var(--svart);
@@ -585,18 +626,18 @@ button.hero-btn { font-family: 'Inter', sans-serif; cursor: pointer; }
 .sok-rad input {
     width: 100%;
     padding: 12px 18px;
-    border: 1px solid var(--border-soft);
+    border: 1px solid var(--border-field);
     border-radius: 999px;
     font-family: 'Inter', sans-serif;
     font-size: 15px;
     background: var(--bg-card);
     color: var(--text-strong);
-    transition: border-color 0.2s;
+    box-shadow: var(--shadow-field);
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 .sok-rad input:focus {
-    outline: none;
-    border-color: var(--guld);
-    box-shadow: 0 0 0 3px rgba(229,192,75,0.18);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-field), 0 0 0 3px rgba(229,192,75,0.18);
 }
 .sr-only {
     position: absolute;
@@ -660,7 +701,9 @@ button.hero-btn { font-family: 'Inter', sans-serif; cursor: pointer; }
     box-shadow: var(--shadow-hover);
     border-color: var(--guld);
 }
-.sponsor-card--funded { opacity: 0.85; }
+/* Finansierade behov tonas ned med lugnare skugga och kant i stället för
+   opacitet – opaciteten drog ned all text i kortet under 4,5:1. */
+.sponsor-card--funded { box-shadow: none; border-color: var(--border-soft); }
 .sponsor-icon {
     width: 72px; height: 72px;
     border-radius: 50%;
@@ -687,7 +730,7 @@ button.hero-btn { font-family: 'Inter', sans-serif; cursor: pointer; }
     margin-bottom: 12px;
 }
 .sponsor-status.is-wanted { background: var(--guld); color: var(--svart); border: 1px solid var(--guld); }
-.sponsor-status.is-funded { background: transparent; color: var(--text-muted); border: 1px solid var(--border-soft); }
+.sponsor-status.is-funded { background: transparent; color: var(--text-body); border: 1px solid var(--border-field); }
 .sponsor-card h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 19px; margin-bottom: 8px; color: var(--text-heading); }
 .sponsor-card p { color: var(--text-body); font-size: 14px; line-height: 1.6; margin-bottom: 12px; }
 .sponsor-card p a { color: var(--accent); }
@@ -764,6 +807,17 @@ button.hero-btn { font-family: 'Inter', sans-serif; cursor: pointer; }
     justify-content: center;
     font-size: 64px;
 }
+/* Foto i stället för emoji (startsidans "Hej, jag är Becca!"). Bilden är
+   beskuren strax ovanför huvudet ned till bibeln, och rutan följer bildens
+   proportioner så att hela motivet syns oavsett skärmbredd. */
+.about-img--foto { padding: 0; overflow: hidden; height: auto; aspect-ratio: 1000 / 944; }
+.about-img--foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+}
 .about-text h2 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 26px; color: var(--text-heading); margin-bottom: 16px; }
 .about-text p { color: var(--text-body); line-height: 1.8; margin-bottom: 12px; }
 
@@ -800,20 +854,20 @@ button.hero-btn { font-family: 'Inter', sans-serif; cursor: pointer; }
 .form-group select {
     width: 100%;
     padding: 12px 16px;
-    border: 1px solid var(--border-soft);
+    border: 1px solid var(--border-field);
     border-radius: 8px;
     font-family: 'Inter', sans-serif;
     font-size: 15px;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
     background: var(--bg-card);
     color: var(--text-strong);
+    box-shadow: var(--shadow-field);
 }
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
-    outline: none;
-    border-color: var(--guld);
-    box-shadow: 0 0 0 3px rgba(229,192,75,0.18);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-field), 0 0 0 3px rgba(229,192,75,0.18);
 }
 .form-group textarea { resize: vertical; min-height: 120px; }
 
@@ -849,7 +903,7 @@ footer {
 footer h2 { color: var(--guld); font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 16px; margin-bottom: 16px; }
 footer p, footer a { font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.7); text-decoration: none; }
 footer a:hover { color: var(--guld-ljus); }
-.footer-bottom a { color: rgba(255,255,255,0.6); }
+.footer-bottom a { color: rgba(255,255,255,0.78); }
 .footer-bottom a:hover { color: var(--guld-ljus); }
 .footer-bottom {
     max-width: 1200px;
@@ -858,7 +912,8 @@ footer a:hover { color: var(--guld-ljus); }
     border-top: 1px solid rgba(255,255,255,0.15);
     text-align: center;
     font-size: 13px;
-    color: rgba(255,255,255,0.5);
+    /* 50 % vit var sajtens svagaste text (APCA Lc 39). 68 % ger Lc 60. */
+    color: rgba(255,255,255,0.68);
 }
 
 /* === RESPONSIVE === */
@@ -944,7 +999,7 @@ footer a:hover { color: var(--guld-ljus); }
 }
 .theme-toggle {
     background: none;
-    border: 1px solid var(--border-soft);
+    border: 1px solid var(--border-field);
     border-radius: 6px;
     padding: 0 10px;
     height: 34px;
@@ -968,7 +1023,7 @@ footer a:hover { color: var(--guld-ljus); }
     gap: 6px;
     padding: 0 10px;
     height: 34px;
-    border: 1px solid var(--border-soft);
+    border: 1px solid var(--border-field);
     border-radius: 6px;
     font-size: 14px;
     color: var(--text-body);

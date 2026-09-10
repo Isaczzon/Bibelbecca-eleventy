@@ -26,7 +26,7 @@ eleventyComputed:
         <a class="hero-btn" href="/{{ loc.prefix }}innehall/">{{ sidan.hero.knapptext }}</a>
         {% endif %}
         {% if sajten.youtube %}
-        <a class="hero-btn hero-btn--ghost" href="{{ sajten.youtube }}" target="_blank" rel="noopener">▶ {{ ui.prenumerera }}</a>
+        <a class="hero-btn hero-btn--ghost hero-btn--youtube" href="{{ sajten.youtube }}" target="_blank" rel="noopener">▶ {{ ui.prenumerera }}</a>
         {% endif %}
 
         <div class="stats-rad">
@@ -88,7 +88,9 @@ eleventyComputed:
 <section class="section-alt">
     <div class="section">
         <div class="about-section fade-in" style="margin-bottom:0;">
-            <div class="about-img">👋</div>
+            <div class="about-img about-img--foto">
+                <img src="{{ '/images/hej-jag-ar-becca.jpg' | url }}" alt="Becca sitter vid poddmikrofonen med en uppslagen bibel framför sig" width="1000" height="944" loading="lazy" decoding="async">
+            </div>
             <div class="about-text">
                 <h2>{{ sidan.om.rubrik }}</h2>
                 <p>{{ sidan.om.text }}</p>
