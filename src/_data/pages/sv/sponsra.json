@@ -2,30 +2,30 @@
   "navnamn": "Sponsra",
   "hero": {
     "rubrik": "Var med och sponsra",
-    "undertitel": "Hjälp BibelBecca-podden att växa – sponsra utrustning som gör innehållet bättre"
+    "undertitel": "Hjälp BibelBecca-podden att växa – varje bidrag gör skillnad"
   },
-  "intro": "BibelBecca drivs helt ideellt. Vill du vara med och möjliggöra podden kan du sponsra konkret utrustning – som mikrofoner, kameror och belysning. Här nedanför ser du vad som behövs just nu. Hör av dig via kontaktsidan så berättar jag mer!",
-  "behov": {
-    "rubrik": "Det här behövs just nu",
-    "undertitel": "Aktuella sponsorbehov – stort som smått, allt gör skillnad"
+  "intro": "BibelBecca drivs helt ideellt. Här nedanför ser du vad som behövs just nu, stort som smått. Välj det du vill bidra till och swisha direkt – eller ge ett valfritt belopp.",
+  "prisgrans": 500,
+  "gosedjur": {
+    "mottagare": "H.K.H. Kronprinsessan Victorias barn- och ungdomssjukhus",
+    "text": "För varje bidrag skänker Becca ett handvirkat gosedjur till {mottagare}."
   },
-  "tack": {
-    "rubrik": "Som tack: välj en virkad bibelsak",
-    "text": "Alla som sponsrar får välja en av Beccas handvirkade bibelsaker som tack – en liten hälsning med stort hjärta. Skriv i meddelandet vilken du önskar!",
-    "saker": [
-      { "namn": "Bibelband", "ikon": "🔖", "beskrivning": "Handvirkat bokmärkesband till din bibel" },
-      { "namn": "Ett lamm", "ikon": "🐑", "beskrivning": "Litet virkat lamm – Guds lamm som symbol" },
-      { "namn": "En åsna", "ikon": "🫏", "beskrivning": "Virkad åsna – som den Jesus red på" },
-      { "namn": "En duva", "ikon": "🕊️", "beskrivning": "Virkad duva – fredens och Andens symbol" }
-    ]
+  "sma": {
+    "rubrik": "Små behov",
+    "undertitel": "Smått som gör stor skillnad – swisha beloppet direkt"
+  },
+  "stora": {
+    "rubrik": "Större behov",
+    "undertitel": "Utrustning som lyfter podden – varje krona räknas, hela eller delar av beloppet"
+  },
+  "donation": {
+    "rubrik": "Valfritt bidrag",
+    "text": "Vill du hellre ge ett valfritt belopp? Skanna QR-koden med Swish, välj summa och skriv gärna en hälsning.",
+    "swish": "",
+    "qr": ""
   },
   "ovrigt": {
     "rubrik": "Andra sätt att stötta",
     "text": "Allt stöd är inte pengar! Du stöttar också genom att prenumerera på kanalen, gilla och dela videorna, lämna en recension på podden – och framför allt genom att be för arbetet."
-  },
-  "cta": {
-    "rubrik": "Vill du sponsra något?",
-    "text": "Skriv till mig via kontaktformuläret och berätta vad du vill sponsra, så återkommer jag med detaljer.",
-    "knapptext": "Till kontaktsidan"
   }
 }

@@ -16,10 +16,6 @@
     <meta name="robots" content="noindex">
     {%- else %}
     <link rel="canonical" href="{{ meta.basurl }}{{ page.url | url }}">
-    {%- for l in locales %}
-    <link rel="alternate" hreflang="{{ l.code }}" href="{{ meta.basurl }}{{ page.url | bytLokal(lokal.prefix, l.prefix) | url }}">
-    {%- endfor %}
-    <link rel="alternate" hreflang="x-default" href="{{ meta.basurl }}{{ page.url | bytLokal(lokal.prefix, '') | url }}">
     {%- endif %}
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="{{ sajten.logotopp }}">
@@ -39,8 +35,10 @@
     {%- set fontUrl = "https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Playfair+Display:ital,wght@1,400;1,500&family=Inter:wght@400;500;600&display=swap" %}
     <link rel="stylesheet" href="{{ fontUrl }}" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="{{ fontUrl }}"></noscript>
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/favicon.svg">
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="/favicon-32.png">
     <meta name="theme-color" content="#141414">
     {#- CSS:en inlinas så att första målningen inte behöver vänta på en
         extra nätverksrundtur (sidan är liten nog för att det ska löna sig) -#}
@@ -53,15 +51,6 @@
                 var savedTheme = localStorage.getItem('theme');
                 document.documentElement.setAttribute('data-theme', savedTheme || 'dark');
 
-                // 2. Om besökaren tidigare valt ett annat språk och nu landar på
-                //    startsidan, skicka dem till sitt språks startsida. (Endast från
-                //    roten så att delade djuplänkar respekteras.)
-                var savedLang = localStorage.getItem('lang');
-                var prefixes = { en: 'en/' };
-                var root = '{{ "/" | url }}';
-                if (savedLang && prefixes[savedLang] && (location.pathname === root)) {
-                    location.replace(root + prefixes[savedLang]);
-                }
             } catch (e) { /* localStorage saknas; kör vidare */ }
         })();
     </script>
@@ -84,22 +73,6 @@
         <div class="nav-actions">
             <button id="themeToggle" class="theme-toggle" type="button" aria-label="{{ ui.vaxlaTema }}" title="{{ ui.vaxlaTema }}">🌙</button>
 
-            <details class="lang-switch">
-                <summary>
-                    <img class="lang-flag" src="https://flagcdn.com/w40/{{ lokal.flagga }}.png" alt="" loading="lazy">
-                    <span>{{ ui.sprak }}</span>
-                </summary>
-                <ul class="lang-menu">
-                    {% for l in locales %}
-                    <li>
-                        <a href="{{ page.url | bytLokal(lokal.prefix, l.prefix) }}" class="{% if l.code == kod %}active{% endif %}" hreflang="{{ l.code }}">
-                            <img class="lang-flag" src="https://flagcdn.com/w40/{{ l.flagga }}.png" alt="" loading="lazy">
-                            <span>{{ l.sprak }}</span>
-                        </a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </details>
         </div>
 
         <button type="button" class="hamburger" aria-label="{{ ui.meny }}" aria-expanded="false" aria-controls="navLinks">

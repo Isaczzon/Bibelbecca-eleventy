@@ -13,8 +13,67 @@ eleventyComputed:
 ---
 {%- set kod = loc.code -%}
 {%- set sidan = pages[kod].sponsra -%}
-{%- set ui = t[kod] -%}
 {%- set behov = collections.sponsorbehov | medLang(kod) | sorteraOrdning -%}
+{%- set prisgrans = sidan.prisgrans or 500 -%}
+{%- set gosedjurText = (sidan.gosedjur.text or "") | replace("{mottagare}", sidan.gosedjur.mottagare or "") -%}
+{#- Behov utan pris hamnar bland de större: där kan man bidra med valfri del av beloppet. -#}
+{%- set sma = [] -%}
+{%- set stora = [] -%}
+{%- for post in behov -%}
+    {%- if post.data.pris and post.data.pris <= prisgrans -%}
+        {%- set _ = sma.push(post) -%}
+    {%- else -%}
+        {%- set _ = stora.push(post) -%}
+    {%- endif -%}
+{%- endfor -%}
+
+{#- Ett sponsorkort med Swish-ruta. Rutan är en <dialog> som site.js öppnar
+    när knappen klickas; utan JS är knappen verkningslös men all information
+    finns också i sektionen Valfritt bidrag. -#}
+{%- macro kort(post, sidan, gosedjurText, kod) -%}
+{%- set finansierad = post.data.status == 'Finansierad' -%}
+{%- set dialogId = 'swish-' ~ post.fileSlug -%}
+{%- set qr = post.data.swishqr or sidan.donation.qr -%}
+<div class="sponsor-card fade-in{% if finansierad %} sponsor-card--funded{% endif %}">
+    {% if post.data.bild %}
+    <div class="sponsor-img" style="background-image: url('{{ post.data.bild | url }}');"></div>
+    {% else %}
+    <div class="sponsor-icon">{{ post.data.ikon or '🎁' }}</div>
+    {% endif %}
+    <span class="sponsor-status {% if finansierad %}is-funded{% else %}is-wanted{% endif %}">
+        {% if finansierad %}✓ Finansierad – tack!{% else %}Önskas{% endif %}
+    </span>
+    <h3>{{ post.data.titel }}</h3>
+    {% if post.data.pris %}<p class="sponsor-pris">{{ post.data.pris | tal('sv-SE') }} kr</p>{% endif %}
+    <p>{{ post.data.beskrivning }}</p>
+    {% if post.data.lank %}
+    <p><a href="{{ post.data.lank }}" target="_blank" rel="noopener">Se exempel på produkt →</a></p>
+    {% endif %}
+    {% if not finansierad %}
+    <button type="button" class="sponsor-cta" data-dialog="{{ dialogId }}">Vill du sponsra detta? →</button>
+    <dialog class="swish-dialog" id="{{ dialogId }}" aria-labelledby="{{ dialogId }}-rubrik">
+        <div class="swish-dialog-inner">
+            <button type="button" class="swish-stang" data-stang aria-label="Stäng">×</button>
+            <h3 id="{{ dialogId }}-rubrik">{{ post.data.titel }}</h3>
+            {% if post.data.pris %}<p class="swish-belopp">{{ post.data.pris | tal('sv-SE') }} kr</p>{% endif %}
+            {% if qr %}
+            <img class="swish-qr" src="{{ qr | url }}" alt="Swish-QR-kod för {{ post.data.titel }}" width="240" height="240" loading="lazy" decoding="async">
+            <p>Öppna Swish, tryck på <strong>Skanna</strong> och rikta kameran mot koden.
+                {%- if post.data.swishqr %} Belopp och meddelande fylls i automatiskt.
+                {%- else %} Ange {% if post.data.pris %}{{ post.data.pris | tal('sv-SE') }} kr{% else %}beloppet{% endif %} och skriv "{{ post.data.titel }}" som meddelande.{% endif %}</p>
+            {% endif %}
+            {% if sidan.donation.swish %}
+            <p class="swish-nummer">Eller swisha till <strong>{{ sidan.donation.swish }}</strong> och skriv "{{ post.data.titel }}" som meddelande.</p>
+            {% endif %}
+            {% if not qr and not sidan.donation.swish %}
+            <p>Swish-uppgifterna läggs upp inom kort. <a href="/{{ loc.prefix }}kontakt/">Hör av dig via kontaktsidan</a> så länge.</p>
+            {% endif %}
+            {% if gosedjurText %}<p class="swish-gosedjur">🧸 {{ gosedjurText }}</p>{% endif %}
+        </div>
+    </dialog>
+    {% endif %}
+</div>
+{%- endmacro -%}
 
 <section class="subpage-hero"{% if sidan.hero.bild %} style="background-image: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.55)), url('{{ sidan.hero.bild | url }}'); background-size: cover; background-position: center;"{% endif %}>
     <h1>{{ sidan.hero.rubrik }}</h1>
@@ -24,77 +83,62 @@ eleventyComputed:
 <section class="section">
     <div class="subpage-content fade-in" style="padding-top:0; padding-bottom:0;">
         <p style="font-size:17px;">{{ sidan.intro }}</p>
+        {% if gosedjurText %}<p class="gosedjur-rad">🧸 {{ gosedjurText }}</p>{% endif %}
     </div>
 </section>
 
+{% if sma.length %}
 <section class="section-alt">
     <div class="section">
         <div class="section-header fade-in">
-            <h2>{{ sidan.behov.rubrik }}</h2>
-            <p>{{ sidan.behov.undertitel }}</p>
+            <h2>{{ sidan.sma.rubrik }} <span class="pris-badge">upp till {{ prisgrans | tal('sv-SE') }} kr</span></h2>
+            <p>{{ sidan.sma.undertitel }}</p>
         </div>
         <div class="sponsor-grid">
-            {% for post in behov %}
-            <div class="sponsor-card fade-in{% if post.data.status == 'Finansierad' %} sponsor-card--funded{% endif %}">
-                {% if post.data.bild %}
-                <div class="sponsor-img" style="background-image: url('{{ post.data.bild | url }}');"></div>
-                {% else %}
-                <div class="sponsor-icon">{{ post.data.ikon or '🎁' }}</div>
-                {% endif %}
-                <span class="sponsor-status {% if post.data.status == 'Finansierad' %}is-funded{% else %}is-wanted{% endif %}">
-                    {% if post.data.status == 'Finansierad' %}✓ {{ ui.statusFinansierad }}{% else %}{{ ui.statusOnskas }}{% endif %}
-                </span>
-                <h3>{{ post.data.titel }}</h3>
-                <p>{{ post.data.beskrivning }}</p>
-                {% if post.data.lank %}
-                <p><a href="{{ post.data.lank }}" target="_blank" rel="noopener">{{ ui.tillProdukt }} →</a></p>
-                {% endif %}
-                {% if post.data.status != 'Finansierad' %}
-                <a class="sponsor-cta" href="/{{ loc.prefix }}kontakt/">{{ ui.sponsraDetta }} →</a>
-                {% endif %}
-            </div>
-            {% endfor %}
+            {% for post in sma %}{{ kort(post, sidan, gosedjurText, kod) }}{% endfor %}
         </div>
-    </div>
-</section>
-
-{% if sidan.tack.saker.length %}
-<section class="section" id="tack">
-    <div class="section-header fade-in">
-        <h2>{{ sidan.tack.rubrik }}</h2>
-        <p>{{ sidan.tack.text }}</p>
-    </div>
-    <div class="tack-grid">
-        {% for sak in sidan.tack.saker %}
-        <div class="tack-card fade-in">
-            {% if sak.bild %}
-            <div class="tack-img" style="background-image: url('{{ sak.bild | url }}');"></div>
-            {% else %}
-            <div class="tack-icon">{{ sak.ikon or '🧶' }}</div>
-            {% endif %}
-            <h3>{{ sak.namn }}</h3>
-            {% if sak.beskrivning %}<p>{{ sak.beskrivning }}</p>{% endif %}
-        </div>
-        {% endfor %}
     </div>
 </section>
 {% endif %}
 
-<section class="section-alt">
-    <div class="section" style="padding-top:64px; padding-bottom:64px;">
-        <div class="subpage-content fade-in" style="padding-top:0; padding-bottom:0;">
-            <h2 style="margin-top:0;">{{ sidan.ovrigt.rubrik }}</h2>
-            <p>{{ sidan.ovrigt.text }}</p>
+{% if stora.length %}
+<section class="section">
+    <div class="section-header fade-in">
+        <h2>{{ sidan.stora.rubrik }} <span class="pris-badge">över {{ prisgrans | tal('sv-SE') }} kr</span></h2>
+        <p>{{ sidan.stora.undertitel }}</p>
+    </div>
+    <div class="sponsor-grid">
+        {% for post in stora %}{{ kort(post, sidan, gosedjurText, kod) }}{% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<section class="section-alt" id="bidrag">
+    <div class="section">
+        <div class="section-header fade-in">
+            <h2>{{ sidan.donation.rubrik }}</h2>
+            <p>{{ sidan.donation.text }}</p>
+        </div>
+        <div class="donation-ruta fade-in">
+            {% if sidan.donation.qr %}
+            <img class="swish-qr" src="{{ sidan.donation.qr | url }}" alt="Swish-QR-kod för valfritt bidrag" width="240" height="240" loading="lazy" decoding="async">
+            {% endif %}
+            {% if sidan.donation.swish %}
+            <p class="swish-nummer">Swish: <strong>{{ sidan.donation.swish }}</strong></p>
+            {% endif %}
+            {% if not sidan.donation.qr and not sidan.donation.swish %}
+            <p>Swish-uppgifterna läggs upp inom kort. <a href="/{{ loc.prefix }}kontakt/">Hör av dig via kontaktsidan</a> så länge.</p>
+            {% endif %}
+            {% if gosedjurText %}<p class="swish-gosedjur">🧸 {{ gosedjurText }}</p>{% endif %}
         </div>
     </div>
 </section>
 
-{% if sidan.cta.rubrik %}
-<section class="section" style="text-align:center;">
-    <div class="fade-in">
-        <h2 style="font-family:'Montserrat',sans-serif; font-weight:800; font-size:clamp(1.5rem,4vw,2.25rem); color:var(--text-heading); margin-bottom:16px;">{{ sidan.cta.rubrik }}</h2>
-        <p style="color:var(--text-muted); max-width:500px; margin:0 auto 24px;">{{ sidan.cta.text }}</p>
-        <a class="hero-btn hero-btn--alt" href="/{{ loc.prefix }}kontakt/">{{ sidan.cta.knapptext }}</a>
+{% if sidan.ovrigt and sidan.ovrigt.rubrik %}
+<section class="section">
+    <div class="subpage-content fade-in" style="padding-top:0; padding-bottom:0;">
+        <h2 style="margin-top:0;">{{ sidan.ovrigt.rubrik }}</h2>
+        <p>{{ sidan.ovrigt.text }}</p>
     </div>
 </section>
 {% endif %}

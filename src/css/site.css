@@ -975,6 +975,44 @@ footer a:hover { color: var(--guld-ljus); }
     text-decoration: underline;
 }
 
+/* === SPONSRA: pris, Swish-ruta och valfritt bidrag === */
+.sponsor-pris { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 22px; color: var(--accent); margin: 0 0 10px; }
+.pris-badge {
+    display: inline-block; vertical-align: middle; margin-left: 10px; padding: 3px 12px;
+    border-radius: 999px; border: 1px solid var(--guld); color: var(--accent);
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.5px; text-transform: uppercase;
+}
+.gosedjur-rad {
+    margin-top: 16px; padding: 12px 16px; border-left: 3px solid var(--guld);
+    background: var(--bg-section-gold); color: var(--text-body); border-radius: 0 8px 8px 0; font-size: 15px;
+}
+button.sponsor-cta { font-family: 'Inter', sans-serif; cursor: pointer; }
+/* Swish-rutan är en <dialog>: öppnas av site.js, stängs med krysset, Esc eller klick utanför */
+.swish-dialog {
+    border: 1px solid var(--guld); border-radius: 16px; padding: 0;
+    background: var(--bg-card); color: var(--text-strong);
+    max-width: min(420px, calc(100vw - 32px)); box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+}
+.swish-dialog::backdrop { background: rgba(0,0,0,0.65); backdrop-filter: blur(3px); }
+.swish-dialog-inner { position: relative; padding: 36px 28px 28px; text-align: center; }
+.swish-dialog h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 20px; color: var(--text-strong); margin: 0 0 4px; }
+.swish-belopp { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 28px; color: var(--accent); margin: 0 0 16px; }
+/* Vit platta bakom QR-koden så att den går att skanna även i mörkt läge */
+.swish-qr { display: block; width: 240px; height: 240px; max-width: 100%; margin: 0 auto 16px; border-radius: 12px; background: #fff; padding: 8px; box-sizing: border-box; }
+.swish-dialog p, .donation-ruta p { color: var(--text-body); font-size: 15px; line-height: 1.6; margin: 0 0 12px; }
+.swish-nummer strong { color: var(--text-strong); }
+.swish-gosedjur { font-size: 14px; color: var(--text-muted); border-top: 1px dashed var(--border-soft); padding-top: 12px; margin-top: 4px; }
+.swish-stang {
+    position: absolute; top: 10px; right: 10px; width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid var(--border-field); background: var(--bg-card); color: var(--text-strong);
+    font-size: 22px; line-height: 1; cursor: pointer;
+}
+.swish-stang:hover { border-color: var(--guld); color: var(--accent); }
+.donation-ruta {
+    max-width: 460px; margin: 0 auto; padding: 32px 28px; text-align: center;
+    background: var(--bg-card); border: 1px dashed var(--guld); border-radius: 16px; box-shadow: var(--shadow-soft);
+}
+
 /* === VARUMÄRKESIKONER (SVG i currentColor) === */
 .ikon {
     display: inline-block;
@@ -1005,52 +1043,3 @@ footer a:hover { color: var(--guld-ljus); }
 .theme-toggle:hover { border-color: var(--guld); }
 [data-theme="dark"] .theme-toggle { background: var(--bg-card); }
 
-.lang-switch { position: relative; }
-.lang-switch summary {
-    list-style: none;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 0 10px;
-    height: 34px;
-    border: 1px solid var(--border-field);
-    border-radius: 6px;
-    font-size: 14px;
-    color: var(--text-body);
-    background: var(--bg-card);
-}
-.lang-switch summary::-webkit-details-marker { display: none; }
-.lang-switch[open] summary { border-color: var(--guld); }
-.lang-menu {
-    position: absolute;
-    right: 0;
-    top: calc(100% + 8px);
-    background: var(--bg-card);
-    border: 1px solid var(--border-soft);
-    border-radius: 8px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-    min-width: 160px;
-    padding: 6px 0;
-    list-style: none;
-    z-index: 1100;
-}
-.lang-menu a {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 16px;
-    text-decoration: none;
-    color: var(--text-body);
-    font-size: 14px;
-}
-.lang-menu a:hover { background: var(--bg-section-gold); color: var(--text-heading); }
-.lang-menu a.active { color: var(--text-heading); font-weight: 600; }
-.lang-flag {
-    width: 22px;
-    height: 16px;
-    object-fit: cover;
-    border-radius: 2px;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.08);
-    flex-shrink: 0;
-}

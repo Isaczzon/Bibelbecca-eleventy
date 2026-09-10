@@ -1,4 +1,3 @@
 [
-  { "code": "sv", "iso": "sv-SE", "sprak": "Svenska", "prefix": "", "flagga": "se" },
-  { "code": "en", "iso": "en-US", "sprak": "English", "prefix": "en/", "flagga": "gb" }
+  { "code": "sv", "iso": "sv-SE", "sprak": "Svenska", "prefix": "", "flagga": "se" }
 ]

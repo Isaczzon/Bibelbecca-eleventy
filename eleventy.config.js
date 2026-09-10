@@ -3,7 +3,7 @@ import { HtmlBasePlugin } from "@11ty/eleventy";
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("images");
   eleventyConfig.addPassthroughCopy({ "src/admin": "admin" });
-  eleventyConfig.addPassthroughCopy({ "src/favicon.svg": "favicon.svg" });
+  eleventyConfig.addPassthroughCopy({ "src/favicon.svg": "favicon.svg", "src/favicon.ico": "favicon.ico", "src/favicon-32.png": "favicon-32.png", "src/favicon-16.png": "favicon-16.png" });
   eleventyConfig.addPassthroughCopy({ "src/css": "css" });
   eleventyConfig.addPassthroughCopy({ "src/js": "js" });
   eleventyConfig.ignores.add("src/admin/**");

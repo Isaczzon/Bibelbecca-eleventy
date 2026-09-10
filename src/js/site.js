@@ -1,18 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Kom ihåg besökarens språk till nästa besök
-    try {
-        const culture = document.documentElement.getAttribute('data-culture');
-        if (culture) localStorage.setItem('lang', culture);
-    } catch (e) { /* ignore */ }
-
-    // Spara språkvalet direkt vid klick i språkmenyn — annars hinner
-    // startsidans omdirigering skicka tillbaka besökaren till det gamla språket
-    document.querySelectorAll('.lang-menu a').forEach((a) =>
-        a.addEventListener('click', () => {
-            try { localStorage.setItem('lang', a.getAttribute('hreflang')); } catch (e) { /* ignore */ }
-        })
-    );
-
     const nav = document.getElementById('navbar');
     if (nav) {
         window.addEventListener('scroll', () => {
@@ -239,4 +225,23 @@ document.addEventListener('DOMContentLoaded', () => {
             updateIcon();
         });
     }
+
+    // Swish-rutor på sponsorsidan: knappen öppnar sin <dialog>; krysset, Esc
+    // eller ett klick utanför rutan stänger den.
+    document.addEventListener('click', (e) => {
+        const oppna = e.target.closest('[data-dialog]');
+        if (oppna) {
+            const ruta = document.getElementById(oppna.getAttribute('data-dialog'));
+            if (ruta && typeof ruta.showModal === 'function' && !ruta.open) ruta.showModal();
+            return;
+        }
+        const stang = e.target.closest('[data-stang]');
+        if (stang) {
+            const ruta = stang.closest('dialog');
+            if (ruta) ruta.close();
+            return;
+        }
+        if (e.target instanceof HTMLDialogElement && e.target.open) e.target.close();
+    });
+
 });

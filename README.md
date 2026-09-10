@@ -7,7 +7,7 @@
 
 Statisk webbplats byggd med [Eleventy](https://www.11ty.dev/), publicerad på **GitHub Pages** och redigerbar via **[Sveltia CMS](https://github.com/sveltia/sveltia-cms)** på `/admin/`.
 
-Sajten har samma struktur som Elimkyrkan Mantorps webbplats: mörkt/ljust läge, två språk (svenska, engelska), YouTube-inbäddningar och kontaktformulär via Formspree.
+Sajten har samma struktur som Elimkyrkan Mantorps webbplats: mörkt/ljust läge, enbart svenska, YouTube-inbäddningar och kontaktformulär via Formspree.
 
 ## Sidor
 

@@ -163,29 +163,37 @@ collections:
               - { name: undertitel, label: Undertitel, widget: string, i18n: true }
               - { name: bild, label: Bakgrundsbild, widget: image, required: false, i18n: duplicate }
           - { name: intro, label: Introtext, widget: text, i18n: true }
-          - name: behov
-            label: Sektion Sponsorbehov (rubriker)
+          - { name: prisgrans, label: Prisgräns (kr), widget: number, value_type: int, default: 500, i18n: duplicate, hint: "Behov upp till gränsen hamnar i första sektionen, dyrare i den andra." }
+          - name: gosedjur
+            label: Gosedjuret (visas i alla tre sektioner)
+            widget: object
+            i18n: true
+            fields:
+              - { name: mottagare, label: Mottagare, widget: string, i18n: true, hint: "T.ex. H.K.H. Kronprinsessan Victorias barn- och ungdomssjukhus" }
+              - { name: text, label: Text, widget: text, i18n: true, hint: "Skriv {mottagare} där mottagarens namn ska in." }
+          - name: sma
+            label: Sektion 1 – behov upp till prisgränsen
             widget: object
             i18n: true
             fields:
               - { name: rubrik, label: Rubrik, widget: string, i18n: true }
               - { name: undertitel, label: Undertitel, widget: string, i18n: true }
-          - name: tack
-            label: Tack-gåvor (virkade bibelsaker)
+          - name: stora
+            label: Sektion 2 – behov över prisgränsen
+            widget: object
+            i18n: true
+            fields:
+              - { name: rubrik, label: Rubrik, widget: string, i18n: true }
+              - { name: undertitel, label: Undertitel, widget: string, i18n: true }
+          - name: donation
+            label: Sektion 3 – valfritt bidrag via Swish
             widget: object
             i18n: true
             fields:
               - { name: rubrik, label: Rubrik, widget: string, i18n: true }
               - { name: text, label: Text, widget: text, i18n: true }
-              - name: saker
-                label: Virkade saker att välja på
-                widget: list
-                i18n: true
-                fields:
-                  - { name: namn, label: Namn, widget: string }
-                  - { name: ikon, label: Ikon (emoji), widget: string, required: false, hint: "Visas om ingen bild laddats upp, t.ex. 🐑 🔖 🕊️" }
-                  - { name: bild, label: Bild (gärna foto på den virkade saken), widget: image, required: false }
-                  - { name: beskrivning, label: Kort beskrivning, widget: string, required: false }
+              - { name: swish, label: Swish-nummer, widget: string, required: false, i18n: duplicate, hint: "Visas som text under QR-koden och i Swish-rutorna." }
+              - { name: qr, label: Allmän Swish-QR-kod, widget: image, required: false, i18n: duplicate, hint: "QR-kod utan förifyllt belopp. Används också för behov som saknar egen kod." }
           - name: ovrigt
             label: Andra sätt att stötta
             widget: object
@@ -193,14 +201,6 @@ collections:
             fields:
               - { name: rubrik, label: Rubrik, widget: string, i18n: true }
               - { name: text, label: Text, widget: text, i18n: true }
-          - name: cta
-            label: Avslutande sektion
-            widget: object
-            i18n: true
-            fields:
-              - { name: rubrik, label: Rubrik, widget: string, i18n: true }
-              - { name: text, label: Text, widget: text, i18n: true }
-              - { name: knapptext, label: Knapptext, widget: string, i18n: true }
 
       - name: integritet
         label: Integritetspolicy
@@ -287,6 +287,8 @@ collections:
           - { label: "Finansierad", value: "Finansierad" }
       - { name: lank, label: Länk till exempel på produkt (valfritt), widget: string, required: false, i18n: duplicate }
       - { name: ordning, label: Ordning, widget: number, value_type: int, hint: "Lägre nummer visas först", i18n: duplicate }
+      - { name: pris, label: Pris (kr), widget: number, value_type: int, required: false, i18n: duplicate, hint: "Styr vilken sektion behovet hamnar i (upp till eller över prisgränsen) och visas i Swish-rutan." }
+      - { name: swishqr, label: Swish-QR-kod, widget: image, required: false, i18n: duplicate, hint: "Skapa i Swish-appen (Skapa QR-kod) med belopp och meddelande förifyllt. Utan egen kod visas den allmänna koden från sponsorsidan." }
 
   - name: installningar
     label: Inställningar
