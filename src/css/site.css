@@ -440,6 +440,9 @@ main { padding-top: 72px; }
    display:none gör att lazy-laddade miniatyrer inte hämtas i förväg. */
 .video-block.dold { display: none; }
 button.hero-btn { font-family: 'Inter', sans-serif; cursor: pointer; }
+/* Kortrubriker (video-, kategori-, sponsor- och tack-kort) i vit/svart i stället
+   för guld: text-strong är #f0f0f0 i mörkt läge och #1A1A1A i ljust. Sektions-
+   rubriker och Har du en bibelfråga?-rutan behåller guldet. */
 .video-block h2,
 .video-block h3 {
     margin: 0;
@@ -447,7 +450,7 @@ button.hero-btn { font-family: 'Inter', sans-serif; cursor: pointer; }
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 16px;
-    color: var(--text-heading);
+    color: var(--text-strong);
 }
 .video-embed {
     position: relative;
@@ -592,7 +595,7 @@ button.hero-btn { font-family: 'Inter', sans-serif; cursor: pointer; }
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
     font-size: 19px;
-    color: var(--text-heading);
+    color: var(--text-strong);
     margin-bottom: 6px;
 }
 .kat-antal {
@@ -731,7 +734,7 @@ button.hero-btn { font-family: 'Inter', sans-serif; cursor: pointer; }
 }
 .sponsor-status.is-wanted { background: var(--guld); color: var(--svart); border: 1px solid var(--guld); }
 .sponsor-status.is-funded { background: transparent; color: var(--text-body); border: 1px solid var(--border-field); }
-.sponsor-card h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 19px; margin-bottom: 8px; color: var(--text-heading); }
+.sponsor-card h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 19px; margin-bottom: 8px; color: var(--text-strong); }
 .sponsor-card p { color: var(--text-body); font-size: 14px; line-height: 1.6; margin-bottom: 12px; }
 .sponsor-card p a { color: var(--accent); }
 /* Svart knapp med guldram – "Gift"-motivet från podden */
@@ -784,7 +787,7 @@ button.hero-btn { font-family: 'Inter', sans-serif; cursor: pointer; }
     background-position: center;
     margin-bottom: 14px;
 }
-.tack-card h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; color: var(--text-heading); margin-bottom: 6px; }
+.tack-card h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; color: var(--text-strong); margin-bottom: 6px; }
 .tack-card p { color: var(--text-muted); font-size: 13px; line-height: 1.5; margin: 0; }
 
 /* === ABOUT PAGE === */
