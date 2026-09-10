@@ -5,7 +5,7 @@
 
 backend:
   name: github
-  repo: Isaczzon/Bibelbecca # TODO: byt till rätt ägare/repo om det skiljer sig
+  repo: Isaczzon/Bibelbecca-eleventy # TODO: byt till rätt ägare/repo om det skiljer sig
   branch: main
   base_url: https://BYT-UT-MIG.workers.dev # TODO: er sveltia-cms-auth Worker-URL
 

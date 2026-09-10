@@ -30,7 +30,7 @@ jobs:
       - run: npm ci
       - run: npx @11ty/eleventy
         env:
-          PATH_PREFIX: /Bibelbecca/
+          PATH_PREFIX: /Bibelbecca-eleventy/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

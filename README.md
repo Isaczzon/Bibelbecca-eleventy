@@ -38,8 +38,8 @@ npm start        # http://localhost:8080
 
 ### 1. Skapa GitHub-repot och aktivera GitHub Pages
 
-1. Skapa ett repo (t.ex. `Bibelbecca`) och pusha innehållet i den här mappen.
-2. GitHub → repo **Settings → Pages → Source: GitHub Actions**. Nästa push bygger och publicerar sajten till `https://<ägare>.github.io/Bibelbecca/`.
+1. Skapa ett repo (t.ex. `Bibelbecca-eleventy`) och pusha innehållet i den här mappen.
+2. GitHub → repo **Settings → Pages → Source: GitHub Actions**. Nästa push bygger och publicerar sajten till `https://<ägare>.github.io/Bibelbecca-eleventy/`.
 3. Uppdatera `repo:` i `src/admin/config.yml` så att det pekar på rätt `ägare/repo`.
 
 > **Eget domännamn?** (t.ex. `bibelbecca.se`) Lägg till domänen under Settings → Pages och ändra `PATH_PREFIX` i `.github/workflows/deploy.yml` till `/`.
@@ -63,7 +63,7 @@ Sveltia loggar in redaktörer via GitHub. GitHub Pages kan inte hantera OAuth-ha
 
 Gå till repots **Settings → Collaborators**, klicka **Add people** och ange Beccas **e-postadress** (välj Write-behörighet). GitHub skickar en inbjudan via mejl – har hon inget GitHub-konto guidar inbjudningslänken henne genom att skapa ett. Därefter:
 
-1. Gå till `https://<ägare>.github.io/Bibelbecca/admin/`
+1. Gå till `https://<ägare>.github.io/Bibelbecca-eleventy/admin/`
 2. Klicka **Sign in with GitHub**
 3. Redigera och klicka **Spara** – ändringen syns på sajten efter någon minut.
 
