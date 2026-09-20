@@ -1,10 +1,9 @@
 name: Hämta nytt från YouTube
 
 on:
-  schedule:
-    # Varje natt 03:30 UTC – nya videor/shorts/avsnitt blir md-filer.
-    # Deploy-workflowen bygger sajten 04:00 och plockar upp ändringarna.
-    - cron: "30 3 * * *"
+  # Den nattliga schemaläggningen togs bort 2026-09-20: Umbraco-sajten
+  # (Isaczzon/Bibelbecca) hämtar själv från YouTube och är enda källan.
+  # Kan fortfarande köras för hand om repot någon gång skulle behövas igen.
   workflow_dispatch:
 
 permissions:

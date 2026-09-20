@@ -1,9 +1,10 @@
 # BibelBecca – webbplats (Eleventy, den gamla sajten)
 
-> **Obs!** Den här sajten ersätts av Umbraco-sajten i repot
-> [Isaczzon/Bibelbecca](https://github.com/Isaczzon/Bibelbecca). Under övergången
-> är det här repot fortfarande innehållskällan: Umbraco hämtar sidtexter,
-> inslag och sponsorbehov härifrån var 12:e timme.
+> **Obs! Det här repot är historiskt.** Sajten ersattes 2026-09-17 av Umbraco-sajten
+> i repot [Isaczzon/Bibelbecca](https://github.com/Isaczzon/Bibelbecca), som nu är
+> enda innehållskällan och redigeras i dess backoffice. Synken härifrån till Umbraco
+> är avstängd och de nattliga jobben (YouTube-hämtning, Pages-bygge) är stoppade.
+> Ändringar här når inte den publicerade sajten.
 
 Statisk webbplats byggd med [Eleventy](https://www.11ty.dev/), publicerad på **GitHub Pages** och redigerbar via **[Sveltia CMS](https://github.com/sveltia/sveltia-cms)** på `/admin/`.
 
